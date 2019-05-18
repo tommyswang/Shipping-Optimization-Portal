@@ -15,7 +15,7 @@
 </head>
 <body>
   <form action="index.php" method="post">
-<div class="form-row">
+<div class="pickup-section">
   <div class="pickup-address">
     <div class="form-group col-md-6">
       <label for="pickup-name">Pickup Name</label>
@@ -39,8 +39,9 @@
       <input type="text" class="form-control" id="pickup-postal" name="from_postal" placeholder="Zipcode">
     </div>
   </div>
-<br>
+  </div>
 
+<div class="delivery-section">
   <div class="ship-address">
     <div class="form-group col-md-6">
       <label for="ship-name"> Name</label>
@@ -64,12 +65,14 @@
       <input type="text" class="form-control" id="ship-postal" name="to_postal" placeholder="Zipcode">
     </div>
   </div>
-
   </div>
-<br>
 
 
-<div class="form-row">
+
+
+
+
+<div class="shipment-details">
   <div class="form-group col-md-6">
     <label for="weight">Weight</label>
     <input type="text" class="form-control" name="weight_value" id="weight">
