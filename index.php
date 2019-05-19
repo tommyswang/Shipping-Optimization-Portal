@@ -11,9 +11,17 @@ $from_state = $_POST['from_state'];
 $from_postal = $_POST['from_postal'];
 $retailer = $_POST['to_name'];
 
-// echo $to_address;
-// echo $to_city;
-function rates($to_address, $to_city, $to_state, $to_postal, $from_address, $from_city, $from_state, $from_postal) {
+echo '<div class="container">
+        <h2>'. $retailer .' Requirements<h2>';
+        if($retailer == 'walmart') {
+echo      '<h3>Carriers: Fedex</h3>
+          <h3>Delivery Within: 3 Days</h3>';
+        } else if ($retailer == 'target') {
+echo      '<h3>Carriers: Stamps.com</h3>
+          <h3>Delivery Within: 4 Days</h3>';
+        }
+echo    '</div>';
+
   $curl = curl_init();
     curl_setopt_array($curl, array(
       CURLOPT_URL => "https://api.shipengine.com/v1/rates",
@@ -80,14 +88,14 @@ function rates($to_address, $to_city, $to_state, $to_postal, $from_address, $fro
         $currency = strtoupper($rate['shipping_amount']['currency']);
         $service_type = $rate['service_type'];
         $rate_id = $rate['rate_id'];
-        if ($delivery_time <= 3 && $carrier_friendly_name == 'FedEx') {
+        if ($delivery_time <= 3 && $carrier_friendly_name == 'FedEx' && $retailer == 'walmart') {
           echo '  <tr>
               <td>'.$carrier_friendly_name. '<span class="package-type"> '. $package .' </span></td>
               <td>'.$delivery_time . ' Days, ' . $estimated_delivery_date .'</td>
               <td>$'.$ship_price.'</td>
               <td><input type="radio" name="select" value="'.$rate_id.'"></td>
             </tr>';
-        } else if ($delivery_time <= 4 && $carrier_friendly_name == 'Stamps.com') {
+        } else if ($delivery_time <= 4 && $carrier_friendly_name == 'Stamps.com' && $retailer == 'target') {
           echo '  <tr>
               <td>'.$carrier_friendly_name. '<span class="package-type"> '. $package .' </span></td>
               <td>'.$delivery_time . ' Days, ' . $estimated_delivery_date .'</td>
@@ -102,24 +110,3 @@ function rates($to_address, $to_city, $to_state, $to_postal, $from_address, $fro
     echo '</table><input type="submit" value="Submit Order"></form>
     </div>
     </div>';
-}
-
-
-echo '<div class="container">
-        <h2>'. $retailer .' Requirements<h2>';
-        if($retailer == 'walmart') {
-echo      '<h3>Carriers: Fedex</h3>
-          <h3>Delivery Within: 3 Days</h3>';
-        } else if ($retailer == 'target') {
-echo      '<h3>Carriers: Stamps.com</h3>
-          <h3>Delivery Within: 4 Days</h3>';
-        }
-echo    '</div>';
-
-
-
-
-
-
-
-rates($to_address, $to_city, $to_state, $to_postal, $from_address, $from_city, $from_state, $from_postal);
