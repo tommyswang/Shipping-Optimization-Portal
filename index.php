@@ -47,7 +47,18 @@ function rates($to_address, $to_city, $to_state, $to_postal, $from_address, $fro
     $err = curl_error($curl);
 
     curl_close($curl);
+    echo '
+    <div class="container">
+    <div class="row">
 
+    <table class="pg-2-table">
+      <form action="purchase-form.php" method="get">
+      <tr>
+        <th>Carrier</th>
+        <th>Estimated Transit</th>
+        <th>Price</th>
+        <th style="border:none;"></th>
+      </tr>';
 
 
     if ($err) {
@@ -55,22 +66,42 @@ function rates($to_address, $to_city, $to_state, $to_postal, $from_address, $fro
     } else {
       foreach ($rates as $rate) {
         $delivery_time = $rate['delivery_days'];
+        $carrier_friendly_name = $rate['carrier_friendly_name'];
         $package = $rate['package_type'];
+        if ($carrier_friendly_name == 'FedEx') {
+          $package = $rate['service_type'];
+        }
+
         $estimated_delivery_date = $rate['estimated_delivery_date'];
         $estimated_delivery_date = explode("T",$estimated_delivery_date);
         $estimated_delivery_date = $estimated_delivery_date[0];
-        $carrier_friendly_name = $rate['carrier_friendly_name'];
+
         $ship_price = $rate['shipping_amount']['amount'];
         $currency = strtoupper($rate['shipping_amount']['currency']);
         $service_type = $rate['service_type'];
         $rate_id = $rate['rate_id'];
-        if ($delivery_time <= 3) {
-          echo $rate_id . $package . ': '. $delivery_time .'days, ' . $estimated_delivery_date . '  ' . $service_type. ' ' . $carrier_friendly_name . ' Price: ' . $ship_price . $currency .'<br>';
+        if ($delivery_time <= 3 && $carrier_friendly_name == 'FedEx') {
+          echo '  <tr>
+              <td>'.$carrier_friendly_name. '<span class="package-type"> '. $package .' </span></td>
+              <td>'.$delivery_time . ' Days, ' . $estimated_delivery_date .'</td>
+              <td>$'.$ship_price.'</td>
+              <td><input type="radio" name="select" value="'.$rate_id.'"></td>
+            </tr>';
+        } else if ($delivery_time <= 4 && $carrier_friendly_name == 'Stamps.com') {
+          echo '  <tr>
+              <td>'.$carrier_friendly_name. '<span class="package-type"> '. $package .' </span></td>
+              <td>'.$delivery_time . ' Days, ' . $estimated_delivery_date .'</td>
+              <td>$'.$ship_price.'</td>
+              <td><input type="radio" name="select" value="'.$rate_id.'"></td>
+            </tr>';
         }
       }
 
 
     }
+    echo '</table><input type="submit" value="Submit Order"></form>
+    </div>
+    </div>';
 }
 
 
@@ -78,8 +109,10 @@ echo '<div class="container">
         <h2>'. $retailer .' Requirements<h2>';
         if($retailer == 'walmart') {
 echo      '<h3>Carriers: Fedex</h3>
-          <h3>Delivery Within: 3 Days</h3>'
-          ;
+          <h3>Delivery Within: 3 Days</h3>';
+        } else if ($retailer == 'target') {
+echo      '<h3>Carriers: Stamps.com</h3>
+          <h3>Delivery Within: 4 Days</h3>';
         }
 echo    '</div>';
 
@@ -87,28 +120,6 @@ echo    '</div>';
 
 
 
-echo '
-<div class="container">
-<div class="row">
-<table class="pg-2-table">
-  <tr>
-    <th>Carrier</th>
-    <th>Estimated Delivery Days</th>
-    <th>Price</th>
-    <th>Price</th>
-  </tr>
-  <tr>
-    <td>Jill</td>
-    <td>Smith</td>
-    <td>50</td>
-  </tr>
-  <tr>
-    <td>Eve</td>
-    <td>Jackson</td>
-    <td>94</td>
-  </tr>
-</table>
-</div>
-</div>';
 
-// rates($to_address, $to_city, $to_state, $to_postal, $from_address, $from_city, $from_state, $from_postal);
+
+rates($to_address, $to_city, $to_state, $to_postal, $from_address, $from_city, $from_state, $from_postal);

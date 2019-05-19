@@ -3,6 +3,6 @@
 border: 2px solid black;
 }
 
-.pg-2-table tr, .pg-2-table td {
+.pg-2-table tr, .pg-2-table td, .pg-2-table th {
     border: 2px solid black;
 }
