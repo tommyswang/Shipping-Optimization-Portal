@@ -23,6 +23,9 @@ if(isset($_POST['file_submit'])) {
           $res = mysqli_query($connection, $query);
         }
     fclose($handle);
+    echo '<script>';
+    echo 'window.location.href="page-1.php"';  //not showing an alert box.
+    echo '</script>';
      }
   }
 
@@ -30,5 +33,22 @@ if(isset($_POST['file_submit'])) {
 }
 
 
-
  ?>
+ <form action="contract_upload.php" class="form-horizontal" method="post" name="upload_excel" enctype="multipart/form-data">
+     <fieldset>
+
+         <div class="form-group">
+             <label class="col-md-4 control-label" for="filebutton">Select File</label>
+             <div class="col-md-4">
+                 <input type="file" name="file" id="contract-file" class="input-large" accept=".csv">
+             </div>
+         </div>
+
+         <div class="form-group">
+             <div class="col-md-4 col-md-offset-5">
+                 <button type="submit" id="file-submit" name="file_submit" data-loading-text="Loading...">Submit</button>
+             </div>
+         </div>
+
+     </fieldset>
+ </form>

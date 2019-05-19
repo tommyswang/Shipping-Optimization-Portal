@@ -1,5 +1,5 @@
 <?php
-include ('config.php');
+include ('navbar.php');
 $error = NULL;
 
 // Register form is submitted
@@ -51,6 +51,9 @@ if(isset($_POST['submit'])) {
              <a class="close" data-dismiss="alert" aria-label="close">&times;</a>
              <strong>You have successfully created an account.</strong>
            </div>';
+     echo '<script>';
+     echo 'window.location.href="login.php"';
+     echo '</script>';
     }
   }
 

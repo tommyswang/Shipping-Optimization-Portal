@@ -1,3 +1,7 @@
+<?php
+require('navbar.php');
+ ?>
+
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
@@ -19,10 +23,10 @@
 </head>
 <body>
   <form action="index.php" method="post">
-    <div class="headerdiv"><p id="header">New Shipment Quote</p></div>
+    <div class="headerdiv"><p id="header">Choose your vendor</p></div>
         <div id="myProgress">
             <div id="myBar">33%</div>
-          </div>
+        </div>
 </div>
 <div class="pickup-section">
   <div class="pickup-address">
@@ -118,24 +122,5 @@
 </form>
 
 
-
-<form action="contract_upload.php" class="form-horizontal" method="post" name="upload_excel" enctype="multipart/form-data">
-    <fieldset>
-
-        <div class="form-group">
-            <label class="col-md-4 control-label" for="filebutton">Select File</label>
-            <div class="col-md-4">
-                <input type="file" name="file" id="contract-file" class="input-large" accept=".csv">
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-4 col-md-offset-5">
-                <button type="submit" id="file-submit" name="file_submit" data-loading-text="Loading...">Submit</button>
-            </div>
-        </div>
-
-    </fieldset>
-</form>
 </body>
 </html>

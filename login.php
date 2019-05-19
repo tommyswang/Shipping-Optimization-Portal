@@ -1,13 +1,8 @@
 <?php
-include ('config.php');
+include ('navbar.php');
 $error = NULL;
 
-// If user is logged in relocate to main page
-if (isset($_SESSION['user'])) {
-  echo '<script>';
-  echo 'window.location.href="index.php"';  //not showing an alert box.
-  echo '</script>';
-}
+
 
 // Display Email Verification Success Message
 if(!empty($_SESSION['message'])) {
@@ -42,7 +37,7 @@ if(isset($_POST['submit'])) {
 
     // Redirect to main page
     echo '<script>';
-    echo 'window.location.href="index.html"';  //not showing an alert box.
+    echo 'window.location.href="contract_upload.php"';  //not showing an alert box.
     echo '</script>';
   }
 }
