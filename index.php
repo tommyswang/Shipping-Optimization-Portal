@@ -1,5 +1,5 @@
 <?php
-require('starter.php');
+require('navbar.php');
 
 $to_address = $_POST['to_address'];
 $to_city = $_POST['to_city'];
@@ -11,7 +11,9 @@ $from_state = $_POST['from_state'];
 $from_postal = $_POST['from_postal'];
 $retailer = $_POST['to_name'];
 
-echo '<div class="container">
+echo ' <div id="myProgress">
+            <div id="myBar" style="width: 66%;">66%</div>
+        </div><div class="container">
         <h2>'. $retailer .' Requirements<h2>';
         if($retailer == 'walmart') {
 echo      '<h3>Carriers: Fedex</h3>
@@ -107,6 +109,6 @@ echo    '</div>';
 
 
     }
-    echo '</table><input type="submit" value="Submit Order"></form>
+    echo '</table><input type="submit" value="Submit Order" style="height: 40px;"></form>
     </div>
     </div>';

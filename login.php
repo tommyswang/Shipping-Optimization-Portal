@@ -37,7 +37,7 @@ if(isset($_POST['submit'])) {
 
     // Redirect to main page
     echo '<script>';
-    echo 'window.location.href="contract_upload.php"';  //not showing an alert box.
+    echo 'window.location.href="shipment.php"';  //not showing an alert box.
     echo '</script>';
   }
 }

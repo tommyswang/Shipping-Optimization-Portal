@@ -5,7 +5,7 @@ include ('config.php');
 
 <html lang="en">
 <head>
-  <title>Friendler</title>
+  <title>Vendorly</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1">
   <!-- fontawesome cdn -->
@@ -16,7 +16,9 @@ include ('config.php');
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <!-- Latest compiled JavaScript -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-  <link rel="stylesheet" href="styles.css">
+
+<link rel="stylesheet" href="styles.css">
+
 </head>
 
 <body>
@@ -32,9 +34,18 @@ include ('config.php');
 
           </ul>
           <ul class="navbar-nav">
+              <?php
+                if(isset($_SESSION['user'])) {
+                  echo '<a class="nav-link" href="shipment.php">New Shipment</a>
+                  <a class="nav-link" href="logout.php">Logout</a>
+                  ';
+                } else {
+                  echo '<a class="nav-link" href="login.php">Login</a>
+                  <a class="nav-link" href="register.php">Register</a>';
+                }
 
-              <a class="nav-link" href="login.php">Login</a>
-              <a class="nav-link" href="register.php">Register</a>
+               ?>
+
 
           </ul>
 

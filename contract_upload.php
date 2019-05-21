@@ -24,7 +24,7 @@ if(isset($_POST['file_submit'])) {
         }
     fclose($handle);
     echo '<script>';
-    echo 'window.location.href="page-1.php"';  //not showing an alert box.
+    echo 'window.location.href="shipment.php"';  //not showing an alert box.
     echo '</script>';
      }
   }
