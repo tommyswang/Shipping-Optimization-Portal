@@ -1,1 +1,2 @@
-# djtm-shipping-optimization-portal
+# Vendorly
+Vendor Compliance Made Easy
